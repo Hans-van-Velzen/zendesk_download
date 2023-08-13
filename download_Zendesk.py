@@ -213,16 +213,18 @@ for ticket in tickets:
 	comments = data['comments']
 	allcomments.extend(comments)
 	for comment in comments:
+		comment['TicketId'] = str(ticket['id']) # add the ticketID
+		allcomments.extend(comment)
 		addRecord('comments', comment['id'], comment)
 	i = i + 1
-	if i > 52:
-		break
+	# if i > 52:
+	# 	break
 	if i % 50 == 0:
 		trace('written ' + str(i) + ' tickets with comments to the database')
 
 # output_json = json.dump(comments)
-# with open('comments.json', 'w') as outfile:
-# 	json.dump(json.dumps(comments), outfile)
+with open('comments.json', 'w') as outfile:
+	json.dump(json.dumps(allcomments), outfile)
 
 # some additional data that needs downloading
 # url = 'https://nolsupport.zendesk.com/api/v2/users'
