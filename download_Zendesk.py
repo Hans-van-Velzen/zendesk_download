@@ -13,6 +13,8 @@ maxindex = 200
 _trace = True
 pguser = 'zendesk'
 pgpw = 'zendesk'
+zdpw = 'zendesk'
+zduser = 'zendesk'
 pghost = 'localhost'
 pgport = '5434'
 pgdb = 'zendesk'
@@ -68,7 +70,7 @@ url = "https://nolsupport.zendesk.com/api/v2/groups"
 response = requests.request(
 	"GET",
 	url,
-	auth=('accounts@inpowermovement.org', 'd[tSVmx4S?Z+vnwj'),
+	auth=(zduser, zdpw),
 	headers=headers
 )
 
@@ -96,7 +98,7 @@ url = "https://nolsupport.zendesk.com/api/v2/users?role[]=agent&role[]=end-user&
 response = requests.request(
 	"GET",
 	url,
-	auth=('accounts@inpowermovement.org', 'd[tSVmx4S?Z+vnwj'),
+	auth=(zduser, zdpw),
 	headers=headers
 )
 
@@ -109,7 +111,7 @@ while data['next_page'] is not None and i < maxindex:
 	response = requests.request(
 		"GET",
 		url,
-		auth=('accounts@inpowermovement.org', 'd[tSVmx4S?Z+vnwj'),
+		auth=(zduser, zdpw),
 		headers=headers
 	)
 	if response.status_code == 429:
@@ -146,7 +148,7 @@ trace('Obtaining tickets data')
 response = requests.request(
 	"GET",
 	url,
-	auth=('accounts@inpowermovement.org', 'd[tSVmx4S?Z+vnwj'),
+	auth=(zduser, zdpw),
 	headers=headers	
 )
 
@@ -162,7 +164,7 @@ while eos == False and index < maxindex:
 	response = requests.request(
 		"GET",
 		url,
-		auth=('accounts@inpowermovement.org', 'd[tSVmx4S?Z+vnwj'),
+		auth=(zduser, zdpw),
 		headers=headers
 	)
 	data = json.loads(response.text)
@@ -197,7 +199,7 @@ for ticket in tickets:
 	response = requests.request(
 		"GET",
 		url,
-		auth=('accounts@inpowermovement.org', 'd[tSVmx4S?Z+vnwj'),
+		auth=(zduser, zdpw),
 		headers=headers
 	)
 	if response.status_code == 429:
